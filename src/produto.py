@@ -34,3 +34,16 @@ class GerenciarProdutos:
             print(f'quantidade: {produto.quantidade}')
             print(f'Preço de compra: R$ {produto.preco_compra:.2f}')
             print(f'Preço de Venda: R$ {produto.preco_venda:.2f}')
+    
+    def lista_produtos(self):
+        
+        if self.estoque == 0:
+            print(f'O estoque está vazio! Nenhum produto cadastrado.')
+        
+        else:
+            print(f'Quantidade de produtos cadastrados: {len(self.estoque)}')
+
+            # Percorrendo a lista para LISTAGEM
+            # Utilizando enumerate para pegar ÍNDICE e PRODUTO
+            for indice, produto in enumerate(self.estoque):
+                print(f'{indice + 1}: -> {produto.nome}')

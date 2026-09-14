@@ -1,6 +1,9 @@
+from produto import GerenciarProdutos
+
 class Menu:
     def __init__(self):
         self.opt = 0
+        self.produto  = GerenciarProdutos() # Objeto para guardar o produto
         
     def menu_estoque(self):
         while True:
@@ -19,20 +22,28 @@ class Menu:
             self.opt = int(input(f'Sua escolha: '))
             
             if self.opt == 1:
-                print(f'Vamos cadastrar um produto!')
+                self.produto.cadastrar_produto()
+                print(f'Produto Cadastrado com sucesso!')
+            
             elif self.opt == 2:
                 print(f'Vamos alterar um produto!')
+            
             elif self.opt == 3:
                 print(f'Vamos excluir um produto!')
+            
             elif self.opt == 4:
                 print(f'Vamos Buscar um produto!')
+            
             elif self.opt == 5:
                 print(f'Vamos exibir um relatório listando os produtos!')
+            
             elif self.opt == 6:
                 print(f'Quais produtos mais saíram?')
+            
             elif self.opt == 0:
                 print(f'Saindo...')
                 break
+            
             else:
                 print(f'Não tem essa opção, escolha outra!')
         

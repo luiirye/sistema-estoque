@@ -38,6 +38,7 @@ class Menu:
                 resposta = ""
                 
                 while True:
+
                     resposta = input(f'Deseja exibir todos os produtos com seus detalhes? S/N: ').strip().lower()
                     
                     if resposta == 's':

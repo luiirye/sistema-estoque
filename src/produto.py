@@ -27,17 +27,20 @@ class GerenciarProdutos:
         
     def visualizar_produtos(self):
         
-        print(f'TELA PARA VISUALIZAR OS PRODUTOS')
-        for produto in self.estoque:
-            print(f'nome: {produto.nome}')            
-            print(f'descrição: {produto.descricao}')
-            print(f'quantidade: {produto.quantidade}')
-            print(f'Preço de compra: R$ {produto.preco_compra:.2f}')
-            print(f'Preço de Venda: R$ {produto.preco_venda:.2f}')
+        if not self.estoque:
+            print(f'O estoque está vazio. Sem itens para visualizar.')
+        else:
+            print(f'TELA PARA VISUALIZAR OS PRODUTOS')
+            for produto in self.estoque:
+                print(f'nome: {produto.nome}')            
+                print(f'descrição: {produto.descricao}')
+                print(f'quantidade: {produto.quantidade}')
+                print(f'Preço de compra: R$ {produto.preco_compra:.2f}')
+                print(f'Preço de Venda: R$ {produto.preco_venda:.2f}')
     
     def lista_produtos(self):
         
-        if self.estoque == 0:
+        if not self.estoque:
             print(f'O estoque está vazio! Nenhum produto cadastrado.')
         
         else:
@@ -47,3 +50,54 @@ class GerenciarProdutos:
             # Utilizando enumerate para pegar ÍNDICE e PRODUTO
             for indice, produto in enumerate(self.estoque):
                 print(f'{indice + 1}: -> {produto.nome}')
+                
+    def excluir_produto(self):
+        
+        if not self.estoque:
+            print(f'O estoque não tem produtos, nada para excluir')
+            
+        else:
+            opt:int = 0
+            
+            while True:
+                print(f'Menu de Opções de Exclusão: ')
+                print(
+                     f'1 - Excluir ÚLTIMO PRODUTO CADASTRADO no estoque.\n'
+                    +f'2 - Excluir produto ESPECÍFICO do estoque.\n'
+                    +f'3 - Apagar TODO O ESTOQUE.\n'
+                    +f'0 - Não quero excluir nenhum.\n'
+                )
+                
+                opt = int(input(f'Sua escolha: '))
+                
+                if opt == 1:
+                    print(F'Excluindo ÚLTIMO PRODUTO CADASTRADO.')
+                    removido = self.estoque.pop()
+                    print(f'Produto Removido: {removido.nome}')
+                elif opt == 2:
+                    self.lista_produtos()
+                    item = int(input(f'Qual produto deseja remover do estoque?: '))
+                    item -= 1
+                    removido = self.estoque.pop(item)
+                    print(f'{removido.nome} removido com sucesso!')
+                    
+                elif opt == 3:
+                    
+                    while True:
+                    
+                        resposta = str(input(f'TEM CERTEZA DE QUE DESEJA APAGAR TODO O ESTOQUE?: ')).upper().strip()
+                    
+                        if resposta == 'S':
+                            print(f'Limpando estoque...')
+                            self.estoque.clear()
+                            print(f'Estoque limpo com sucesso!\nQuantidade de itens: {len(self.estoque)}')
+
+                        elif resposta == 'N':
+                            print(f'Retornando para menu de exclusão.')
+
+                        else:
+                            print(f'Escolha apenas S ou N.')
+                        
+                elif opt == 0:
+                    print(f'Cancelando exclusão de produtos...')
+                    break 

@@ -13,9 +13,7 @@ class Menu:
             print(f'1 - Cadastrar Produto(s).\n'
                 + f'2 - Alterar Produto(s).\n'
                 + f'3 - Excluir Produto(s).\n'
-                + f'4 - Lista de Produto(s).\n'
-                + f'5 - Relatório de todos .\n'
-                + f'6 - Produtos que mais saíram.\n'    
+                + f'4 - Lista de Produto(s).\n'    
                 + f'0 - Sair do sistema.\n'
             )
             
@@ -30,15 +28,15 @@ class Menu:
                 print(f'Vamos alterar um produto!')
             
             elif self.opt == 3:
-                print(f'Vamos excluir um produto!')
+                self.produto.excluir_produto()
             
+            # Concluído
             elif self.opt == 4:
                 self.produto.lista_produtos()
                 
                 resposta = ""
                 
                 while True:
-
                     resposta = input(f'Deseja exibir todos os produtos com seus detalhes? S/N: ').strip().lower()
                     
                     if resposta == 's':
@@ -48,13 +46,7 @@ class Menu:
                     else:
                         print(f'Repostas não correspondente, tente novamente!')
                 print(f'Fim da lista de prouto(s)!')
-            
-            elif self.opt == 5:
-                print(f'Vamos exibir um relatório listando os produtos!')
-            
-            elif self.opt == 6:
-                print(f'Quais produtos mais saíram?')
-            
+                        
             elif self.opt == 0:
                 print(f'Saindo...')
                 break

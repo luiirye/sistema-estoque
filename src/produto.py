@@ -74,6 +74,7 @@ class GerenciarProdutos:
                     print(F'Excluindo ÚLTIMO PRODUTO CADASTRADO.')
                     removido = self.estoque.pop()
                     print(f'Produto Removido: {removido.nome}')
+                
                 elif opt == 2:
                     self.lista_produtos()
                     item = int(input(f'Qual produto deseja remover do estoque?: '))
@@ -101,3 +102,40 @@ class GerenciarProdutos:
                 elif opt == 0:
                     print(f'Cancelando exclusão de produtos...')
                     break 
+                
+    def alterar_produto(self):
+             
+        if not self.estoque:
+            print(f'Estoque vazio, ada para alterar.')
+
+        else:
+            print(f'Produtos registrados disponíveis para alteração: ')
+            
+            for indice, produto in enumerate(self.estoque):
+                print(f'{indice + 1}: -> {produto.nome}')
+                
+            opt = int(input(f'Qual produto deseja alterar os dadots?: '))
+            opt -= 1
+            produto = self.estoque[opt]
+            
+            produto.nome = input(f'Nome do produto: ')
+            produto.descricao = input(f'Descrição do produto: ')
+            produto.quantidade = int(input(f'Quantidade: '))
+            produto.preco_compra = float(input(f'Preço de compra: R$ '))
+            produto.preco_venda = float(input(f'Preço de Venda: R$ '))
+            
+            print(f'Produto alterado com sucesso!')
+            
+            while True:
+                
+                resposta = str(input(f'Deseja ver uma lista dos produtos para ver a alteração?: [s/n] ')).lower().strip()
+                
+                if resposta == 's':
+                    self.lista_produtos()
+                    break
+                
+                elif resposta == 'n':
+                    break
+                
+                else:
+                    print(f'Não tem essa opção, escolha apenas s ou n')

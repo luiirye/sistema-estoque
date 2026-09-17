@@ -19,18 +19,21 @@ class Menu:
             
             self.opt = int(input(f'Sua escolha: '))
             
-            # Concluído
+            # Opção para cadastrar um produto na lista
             if self.opt == 1:
                 self.produto.cadastrar_produto()
                 print(f'Produto Cadastrado com sucesso!')
             
+            # Opção para realizar alterações em um produto da lista
             elif self.opt == 2:
-                print(f'Vamos alterar um produto!')
+                self.produto.alterar_produto()
+                print(f'Produto alterado com sucesso!')
             
+            # Opção para excluir um produto da lista
             elif self.opt == 3:
                 self.produto.excluir_produto()
             
-            # Concluído
+            # Opção para listar os produtos da lista
             elif self.opt == 4:
                 self.produto.lista_produtos()
                 

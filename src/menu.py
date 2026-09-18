@@ -1,9 +1,11 @@
 from produto import GerenciarProdutos
+from tipos_validos import TiposValidos
 
 class Menu:
     def __init__(self):
         self.opt = 0
         self.produto  = GerenciarProdutos() # Objeto para guardar o produto
+        self.tipos = TiposValidos() # Objeto para validar se o tipo informado está correspondendo ao que é pedido
         
     def menu_estoque(self):
         while True:
@@ -17,7 +19,7 @@ class Menu:
                 + f'0 - Sair do sistema.\n'
             )
             
-            self.opt = int(input(f'Sua escolha: '))
+            self.opt = self.tipos.ler_inteiro(f'Sua escolha: ')
             
             # Opção para cadastrar um produto na lista
             if self.opt == 1:
@@ -40,7 +42,7 @@ class Menu:
                 resposta = ""
                 
                 while True:
-                    resposta = input(f'Deseja exibir todos os produtos com seus detalhes? S/N: ').strip().lower()
+                    resposta = self.tipos.ler_texto(f'Deseja exibir todos os produtos com seus detalhes? S/N: ').strip().lower()
                     
                     if resposta == 's':
                         self.produto.visualizar_produtos()

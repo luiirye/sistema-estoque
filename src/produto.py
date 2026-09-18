@@ -1,3 +1,5 @@
+from tipos_validos import TiposValidos
+
 class Produto:
     
     def __init__(self, nome, descricao, quantidade, preco_compra, preco_venda):
@@ -11,15 +13,17 @@ class GerenciarProdutos:
     
     def __init__(self):
         self.estoque = []
-            
+        self.tipos = TiposValidos()     
+               
     def cadastrar_produto(self):
         
         print(f'CADASTRO DE PRODUTO')
-        nome = input(f'Nome do produto: ')
-        descricao = input(f'Descrição do produto: ')
-        quantidade = int(input(f'Quantidade: '))
-        preco_compra = float(input(f'Preço de compra: R$ '))
-        preco_venda = float(input(f'Preço de Venda: R$ '))
+        
+        nome = self.tipos.ler_texto(f'Nome do produto: ')
+        descricao = self.tipos.ler_texto(f'Descrição do produto: ')
+        quantidade = self.tipos.ler_inteiro(f'Quantidade: ')
+        preco_compra = self.tipos.ler_float(f'Preço de compra: R$ ')
+        preco_venda = self.tipos.ler_float(f'Preço de Venda: R$ ')
         
         produto = Produto(nome, descricao, quantidade, preco_compra, preco_venda)
         
@@ -68,7 +72,7 @@ class GerenciarProdutos:
                     +f'0 - Não quero excluir nenhum.\n'
                 )
                 
-                opt = int(input(f'Sua escolha: '))
+                opt = self.tipos.ler_inteiro(f'Sua escolha: ')
                 
                 if opt == 1:
                     print(F'Excluindo ÚLTIMO PRODUTO CADASTRADO.')
@@ -86,7 +90,7 @@ class GerenciarProdutos:
                     
                     while True:
                     
-                        resposta = str(input(f'TEM CERTEZA DE QUE DESEJA APAGAR TODO O ESTOQUE?: ')).upper().strip()
+                        resposta = self.tipos.ler_texto(f'TEM CERTEZA DE QUE DESEJA APAGAR TODO O ESTOQUE?: ').upper().strip()
                     
                         if resposta == 'S':
                             print(f'Limpando estoque...')
@@ -114,21 +118,21 @@ class GerenciarProdutos:
             for indice, produto in enumerate(self.estoque):
                 print(f'{indice + 1}: -> {produto.nome}')
                 
-            opt = int(input(f'Qual produto deseja alterar os dadots?: '))
+            opt = self.tipos.ler_inteiro(f'Qual produto deseja alterar os dadots?: ')
             opt -= 1
             produto = self.estoque[opt]
             
-            produto.nome = input(f'Nome do produto: ')
-            produto.descricao = input(f'Descrição do produto: ')
-            produto.quantidade = int(input(f'Quantidade: '))
-            produto.preco_compra = float(input(f'Preço de compra: R$ '))
-            produto.preco_venda = float(input(f'Preço de Venda: R$ '))
+            produto.nome = self.tipos.ler_texto(f'Nome do produto: ')
+            produto.descricao = self.tipos.ler_texto(f'Descrição do produto: ')
+            produto.quantidade = self.tipos.ler_inteiro(f'Quantidade: ')
+            produto.preco_compra = self.tipos.ler_float(f'Preço de compra: R$ ')
+            produto.preco_venda = self.tipos.ler_float(f'Preço de Venda: R$ ')
             
             print(f'Produto alterado com sucesso!')
             
             while True:
                 
-                resposta = str(input(f'Deseja ver uma lista dos produtos para ver a alteração?: [s/n] ')).lower().strip()
+                resposta = self.tipos.ler_texto(f'Deseja ver uma lista dos produtos para ver a alteração?: [s/n] ').lower().strip()
                 
                 if resposta == 's':
                     self.lista_produtos()

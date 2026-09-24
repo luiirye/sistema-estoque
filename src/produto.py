@@ -1,6 +1,7 @@
 from tipos_validos import TiposValidos
 from rich.panel import Panel
 from rich import print
+from rich.console import Console
 
 class Produto:
     
@@ -15,7 +16,8 @@ class GerenciarProdutos:
     
     def __init__(self):
         self.estoque = []
-        self.tipos = TiposValidos()     
+        self.tipos = TiposValidos()
+        self.console = Console()   
                
     def cadastrar_produto(self):
         
@@ -53,25 +55,30 @@ class GerenciarProdutos:
                 
     def visualizar_produtos(self):
         
-        if not self.estoque:
-            print(f'O estoque está vazio. Sem itens para visualizar.')
-        else:
-            print(f'TELA PARA VISUALIZAR OS PRODUTOS')
-            for produto in self.estoque:
-                print(f'nome: {produto.nome}')            
-                print(f'descrição: {produto.descricao}')
-                print(f'quantidade: {produto.quantidade}')
-                print(f'Preço de compra: R$ {produto.preco_compra:.2f}')
-                print(f'Preço de Venda: R$ {produto.preco_venda:.2f}')
-    
+        painel = Panel("Produtos Cadastrados",title="TABELA DE VISUALIZAÇÃO DE PRODUTOS", style="magenta", width=50)
+        print(painel)
+            
+        for i, produto in enumerate(self.estoque, start=1):
+                
+            conteudo_produto  = f'nome: {produto.nome}\n'          
+            conteudo_produto += f'descrição: {produto.descricao}\n'
+            conteudo_produto += f'quantidade: {produto.quantidade}\n'
+            conteudo_produto += f'Preço de compra: R$ {produto.preco_compra:.2f}\n'
+            conteudo_produto += f'Preço de Venda: R$ {produto.preco_venda:.2f}\n'
+                
+        painel_conteudo_produto = Panel(conteudo_produto, title = f"{i}", width=50)
+
+        self.console.print(painel_conteudo_produto)
+            
     def lista_produtos(self):
         
         if not self.estoque:
-            print(f'O estoque está vazio! Nenhum produto cadastrado.')
-        
+                   
+                conteudo_aviso = f'O estoque está vazio. Sem itens para visualizar.'
+                pAviso = Panel(conteudo_aviso, title="Aviso!", style="bold red")
+                print(pAviso)
         else:
             print(f'Quantidade de produtos cadastrados: {len(self.estoque)}')
-
             # Percorrendo a lista para LISTAGEM
             # Utilizando enumerate para pegar ÍNDICE e PRODUTO
             for indice, produto in enumerate(self.estoque):

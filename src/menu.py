@@ -1,5 +1,7 @@
 from produto import GerenciarProdutos
 from tipos_validos import TiposValidos
+from rich.panel import Panel
+from rich import print
 
 class Menu:
     def __init__(self):
@@ -8,16 +10,21 @@ class Menu:
         self.tipos = TiposValidos() # Objeto para validar se o tipo informado está correspondendo ao que é pedido
         
     def menu_estoque(self):
+        
         while True:
-            print(f'=' * 30)
-            print(f'======== MENU ESTOQUE ========')
-            print(f'Escolha uma das opções abaixo: ')
-            print(f'1 - Cadastrar Produto(s).\n'
-                + f'2 - Alterar Produto(s).\n'
-                + f'3 - Excluir Produto(s).\n'
-                + f'4 - Lista de Produto(s).\n'    
-                + f'0 - Sair do sistema.\n'
-            )
+            
+            titulo = "MENU DE ESTOQUE" 
+            
+            conteudo_menu  = "Escolha uma das opções abaixo:\n\n"
+            conteudo_menu += "1 - Cadastrar Produto(s).\n"
+            conteudo_menu += "2 - Alterar Produto(s).\n"
+            conteudo_menu += "3 - Excluir Produto(s).\n"
+            conteudo_menu += "4 - Listagem de Produto(s).\n"
+            conteudo_menu += "0 - Encerrar menu.\n"
+            
+            painel = Panel(conteudo_menu, title=titulo, width=40)
+            
+            print(painel)           
             
             self.opt = self.tipos.ler_inteiro(f'Sua escolha: ')
             
@@ -59,3 +66,6 @@ class Menu:
             else:
                 print(f'Não tem essa opção, escolha outra!')
         
+        
+teste = Menu()
+teste.menu_estoque()

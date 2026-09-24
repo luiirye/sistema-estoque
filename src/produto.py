@@ -1,4 +1,6 @@
 from tipos_validos import TiposValidos
+from rich.panel import Panel
+from rich import print
 
 class Produto:
     
@@ -25,10 +27,30 @@ class GerenciarProdutos:
         preco_compra = self.tipos.ler_float(f'Preço de compra: R$ ')
         preco_venda = self.tipos.ler_float(f'Preço de Venda: R$ ')
         
-        produto = Produto(nome, descricao, quantidade, preco_compra, preco_venda)
+        conteudo_produto  = f"Nome            : {nome}\n"
+        conteudo_produto += f"Descrição       : {descricao}\n"
+        conteudo_produto += f"Quantidade      : {quantidade} un.\n"
+        conteudo_produto += f"Preço de Compra : R$ {preco_compra:.2f}\n"
+        conteudo_produto += f"Preço de Venda  : R$ {preco_venda:.2f}\n"
         
-        self.estoque.append(produto)
+        pProduto = Panel(conteudo_produto, title=f"Produto: {nome}", width=40)
+        print(pProduto)        
         
+        while True:
+            
+            resposta = self.tipos.ler_texto(f'\nDeseja cadastrar esse produto? [S/N]: ').upper()
+            
+            if resposta == 'S':
+                produto = Produto(nome, descricao, quantidade, preco_compra, preco_venda)
+                self.estoque.append(produto)
+                print(f'Produto cadastrado com sucesso!\n')
+                break
+            elif resposta == 'N':
+                print(f'Produto não cadastrado.\n')
+                break
+            else:
+                print(f'Escolha apenas Sim ou Não.\n')
+                
     def visualizar_produtos(self):
         
         if not self.estoque:

@@ -65,7 +65,3 @@ class Menu:
             
             else:
                 print(f'Não tem essa opção, escolha outra!')
-        
-        
-teste = Menu()
-teste.menu_estoque()

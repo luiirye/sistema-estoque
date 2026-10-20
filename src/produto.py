@@ -111,33 +111,56 @@ class GerenciarProdutos:
                 opt = self.tipos.ler_inteiro(f'Sua escolha: ')
                 
                 if opt == 1:
-                    print(F'Excluindo ÚLTIMO PRODUTO CADASTRADO.')
-                    removido = self.estoque.pop()
-                    print(f'Produto Removido: {removido.nome}')
-                
+                    
+                    if not self.estoque:
+                        print(f'A lista está sem Produtos.')
+                        print(f'Não é possível remover o último elemento.\n')
+                        break
+                    
+                    else:
+                        print(F'Excluindo ÚLTIMO PRODUTO CADASTRADO.')
+                        removido = self.estoque.pop()
+                        print(f'Produto Removido: {removido.nome}')
+                        removido = ""
+                        
                 elif opt == 2:
-                    self.lista_produtos()
-                    item = int(input(f'Qual produto deseja remover do estoque?: '))
-                    item -= 1
-                    removido = self.estoque.pop(item)
-                    print(f'{removido.nome} removido com sucesso!')
+                    
+                    if not self.estoque:
+                        print(f'A lista está sem Produtos.')
+                        print(f'Não é possível escolher um produto para ser removido.')
+                        break
+                        
+                    else:
+                        self.lista_produtos()
+                        item = int(input(f'Qual produto deseja remover do estoque?: '))
+                        item -= 1
+                        removido = self.estoque.pop(item)
+                        print(f'{removido.nome} removido com sucesso!')
+                        removido = ""
                     
                 elif opt == 3:
                     
                     while True:
                     
-                        resposta = self.tipos.ler_texto(f'TEM CERTEZA DE QUE DESEJA APAGAR TODO O ESTOQUE?: ').upper().strip()
+                        if not self.estoque:
+                            print(f'A lista está sem Produtos.')
+                            print(f'Não é possível apagar uma lista inteira se estiver vazia.')
+                            break
                     
-                        if resposta == 'S':
-                            print(f'Limpando estoque...')
-                            self.estoque.clear()
-                            print(f'Estoque limpo com sucesso!\nQuantidade de itens: {len(self.estoque)}')
-
-                        elif resposta == 'N':
-                            print(f'Retornando para menu de exclusão.')
-
                         else:
-                            print(f'Escolha apenas S ou N.')
+                            resposta = self.tipos.ler_texto(f'TEM CERTEZA DE QUE DESEJA APAGAR TODO O ESTOQUE?: ').upper().strip()
+                    
+                            if resposta == 'S':
+                                print(f'Limpando estoque...')
+                                self.estoque.clear()
+                                print(f'Estoque limpo com sucesso!\nQuantidade de itens: {len(self.estoque)}')
+                                break
+
+                            elif resposta == 'N':
+                                print(f'Retornando para menu de exclusão.')
+
+                            else:
+                                print(f'Escolha apenas S ou N.')
                         
                 elif opt == 0:
                     print(f'Cancelando exclusão de produtos...')

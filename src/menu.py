@@ -55,7 +55,7 @@ class Menu:
                         break
                     else:
                         print(f'Repostas não correspondente, tente novamente!')
-                print(f'Fim da lista de prouto(s)!')
+                print(f'Fim da lista de produto(s)!')
                         
             elif self.opt == 0:
                 print(f'Saindo...')

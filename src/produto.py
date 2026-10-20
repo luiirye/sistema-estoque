@@ -146,7 +146,7 @@ class GerenciarProdutos:
     def alterar_produto(self):
              
         if not self.estoque:
-            print(f'Estoque vazio, ada para alterar.')
+            print(f'Estoque vazio, nada para alterar.')
 
         else:
             print(f'Produtos registrados disponíveis para alteração: ')
@@ -154,7 +154,7 @@ class GerenciarProdutos:
             for indice, produto in enumerate(self.estoque):
                 print(f'{indice + 1}: -> {produto.nome}')
                 
-            opt = self.tipos.ler_inteiro(f'Qual produto deseja alterar os dadots?: ')
+            opt = self.tipos.ler_inteiro(f'Qual produto deseja alterar os dados?: ')
             opt -= 1
             produto = self.estoque[opt]
             

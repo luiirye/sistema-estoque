@@ -31,13 +31,11 @@ class Menu:
             # Opção para cadastrar um produto na lista
             if self.opt == 1:
                 self.produto.cadastrar_produto()
-                print(f'Produto Cadastrado com sucesso!')
             
             # Opção para realizar alterações em um produto da lista
             elif self.opt == 2:
                 self.produto.alterar_produto()
-                print(f'Produto alterado com sucesso!')
-            
+                            
             # Opção para excluir um produto da lista
             elif self.opt == 3:
                 self.produto.excluir_produto()

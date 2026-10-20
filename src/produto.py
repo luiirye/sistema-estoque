@@ -40,19 +40,26 @@ class GerenciarProdutos:
         
         while True:
             
-            resposta = self.tipos.ler_texto(f'\nDeseja cadastrar esse produto? [S/N]: ').upper()
+            resposta = self.tipos.ler_texto('\nDeseja cadastrar esse produto? [S/N]: ').upper().strip()[0]
+            if not resposta:
+                print(f'Por favor, digite uma resposta [S/N].')
+                continue
             
-            if resposta == 'S':
+            resp = resposta[0] 
+            
+            if resp == 'S':
                 produto = Produto(nome, descricao, quantidade, preco_compra, preco_venda)
                 self.estoque.append(produto)
-                print(f'Produto cadastrado com sucesso!\n')
+                print(f'\nProduto: {produto.nome} foi cadastrado com sucesso!\n')
                 break
-            elif resposta == 'N':
-                print(f'Produto não cadastrado.\n')
+            
+            elif resp == 'N':
+                print(f'\nProduto não foi cadastrado (Cancelado pelo usuário).\n')
                 break
+            
             else:
-                print(f'Escolha apenas Sim ou Não.\n')
-                
+                print(f'Escolha apenas Sim[S] ou Não [N].\n')
+
     def visualizar_produtos(self):
         
         painel = Panel("Produtos Cadastrados",title="TABELA DE VISUALIZAÇÃO DE PRODUTOS", style="magenta", width=50)
